@@ -1,12 +1,15 @@
-import './app.scss';
 import React from 'react';
-import Header from './components/header/header';
+import { Router, Route, browserHistory } from 'react-router';
+import Index from './components/index/index';
+import Users from './components/users/users';
+import User from './components/user/user';
 
-function main() {
-  React.render( <div>
-    <Header />
-    <section> content </section>
-   </div> , document.body);
-}
-
-main();
+React.render((
+  <Router history={browserHistory}>
+    <Route path="/" component={Index}>
+      <Route path="users" component={Users}>
+        <Route path="/user/:userId" component={User} />
+      </Route>
+    </Route>
+  </Router>
+), document.body);
