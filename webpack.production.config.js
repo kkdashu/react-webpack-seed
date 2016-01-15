@@ -5,7 +5,7 @@ var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, 'src/index.js'),
+    app: path.resolve(__dirname, 'src/app.js'),
     vendors: ['react']
   },
   resolve: {
