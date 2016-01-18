@@ -5,18 +5,32 @@ import users from '../../models/users';
 export default class User extends React.Component{
   getInitialState() {
     return {
-      user: { name: 'a' }
+      user: {  }
     };
   }
-  componentDidMount() {
+  fetchUser () {
     const userId = this.props.params.userId;
     let user = users.filter( user => {
-      return user.id === userId;
+      return user.id.toString() === userId;
     })[0];
-    console.log(user);
-    this.setState({
-      user: user
-    });
+    if(!this.ignoreLastFetch) {
+      this.setState({
+        user: user
+      });
+    }
+  }
+  componentDidUpdate(prevProps) {
+    let oldId = prevProps.params.userId;
+    let newId = this.props.params.userId;
+    if(newId !== oldId) {
+      this.fetchUser();
+    }
+  }
+  componentDidMount() {
+    this.fetchUser();
+  }
+  componentWillUnmount() {
+    this.ignoreLastFetch = true;
   }
   render() {
     return (
