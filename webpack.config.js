@@ -11,7 +11,9 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'react': pathToReact
+      'react': pathToReact,
+      'components': path.join(__dirname, 'src/components'),
+      'models': path.join(__dirname, 'src/models')
     }
   },
   output: {
