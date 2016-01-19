@@ -1,6 +1,6 @@
 import './user_add.scss';
 import React from 'react';
-import users from '../../models/users';
+import Users from '../../models/users';
 
 export default class UserAdd extends React.Component {
   handleSubmit(e) {
@@ -10,7 +10,8 @@ export default class UserAdd extends React.Component {
     if(!name || !email) {
       return;
     }
-    users.push({id: users.length + 1, name: name, email: email});
+    var user = {name: name, email: email};
+    Users.add(user);
     this.refs.name.value = '';
     this.refs.email.value = '';
     this.props.history.pushState(null, '/users');

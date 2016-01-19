@@ -6,5 +6,22 @@ let users = [
   { id: 5, name: '李逍遥', email: 'lixiaoyao@gmail.com' },
   { id: 6, name: '过儿', email: 'goer@gmail.com' },
 ];
+users.editById = function(id, newUser) {
+  users = users.map(function(u) {
+    if(u.id === id) {
+      newUser.id = id;
+      return newUser;
+    }
+    return u;
+  });
+};
 
+users.getAll = function() {
+  return users;
+};
+
+users.add = function(user) {
+  user.id = users.length + 1;
+  users.push(user);
+};
 export default users;
