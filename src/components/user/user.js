@@ -64,10 +64,14 @@ export default class User extends React.Component {
       isEdit: !this.state.isEdit
     });
   }
+  handleDelete () {
+    Users.deleteById(this.state.user.id);
+    this.props.history.pushState(null, '/users');
+  }
   render() {
     return (
       <div>
-      { this.state.isEdit ? <div><button onClick={this.editConfirm.bind(this)}>确认</button> <button onClick={this.cancelEdit.bind(this)}>取消</button> </div> :<button onClick={this.toggleIsEdit.bind(this)}>编辑</button> }
+      { this.state.isEdit ? <div><button onClick={this.editConfirm.bind(this)}>确认</button> <button onClick={this.cancelEdit.bind(this)}>取消</button> </div> :<div><button onClick={this.toggleIsEdit.bind(this)}>编辑</button> <button onClick={this.handleDelete.bind(this)}>删除</button></div> }
         <p>
           姓名: {this.state.isEdit ? <input type="text" defaultValue={this.state.user.name} ref='name' /> : this.state.user.name }
         </p>

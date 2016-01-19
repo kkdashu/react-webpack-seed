@@ -24,4 +24,10 @@ users.add = function(user) {
   user.id = users.length + 1;
   users.push(user);
 };
+
+users.deleteById = function(userId) {
+  users = users.filter(function(user) {
+    return user.id !== userId;
+  });
+};
 export default users;
