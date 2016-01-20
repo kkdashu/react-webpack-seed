@@ -1,9 +1,10 @@
 import './user_add.scss';
-import React from 'react';
-import Users from 'models/users';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addUser } from 'actions/user_action';
 
-export default class UserAdd extends React.Component {
-  handleSubmit(e) {
+class UserAdd extends Component {
+  onSubmit(e) {
     e.preventDefault();
     let name = this.refs.name.value.trim();
     let email = this.refs.email.value.trim();
@@ -11,7 +12,7 @@ export default class UserAdd extends React.Component {
       return;
     }
     var user = {name: name, email: email};
-    Users.add(user);
+    this.props.addUser(user);
     this.refs.name.value = '';
     this.refs.email.value = '';
     this.props.history.pushState(null, '/users');
@@ -25,8 +26,13 @@ export default class UserAdd extends React.Component {
         <div>
           <input type="email" ref="email" placeholder="邮箱" />
         </div>
-        <button onClick={this.handleSubmit.bind(this)} type="submit">新增</button>
+        <button onClick={this.onSubmit.bind(this)} type="submit">新增</button>
       </form>
     );
   }
 }
+
+export default connect(
+  null,
+  { addUser }
+)(UserAdd);

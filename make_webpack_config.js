@@ -3,16 +3,17 @@ var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var node_modules = path.resolve(__dirname, 'node_modules');
-var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
+var pathToReact = path.resolve(node_modules, 'react/dist/react.js');
 module.exports = function(options) {
   var entry, plugins;
   if(options.dev) {
     entry = [
-      'webpack/hot/dev-server',
       'webpack-dev-server/client?http://localhost:8080',
+      'webpack/hot/only-dev-server',
       path.resolve(__dirname, 'src/app.js')
     ];
     plugins = [
+      new webpack.HotModuleReplacementPlugin(),
       new ExtractTextPlugin("bundle.css"),
       new HtmlWebpackPlugin({
         template: 'index.html',
@@ -49,9 +50,10 @@ module.exports = function(options) {
     entry: entry,
     resolve: {
       alias: {
-        'react': pathToReact,
+        // 'react': pathToReact,
         'components': path.join(__dirname, 'src/components'),
-        'models': path.join(__dirname, 'src/models')
+        'models': path.join(__dirname, 'src/models'),
+        'actions': path.join(__dirname, 'src/actions')
       }
     },
     output: {

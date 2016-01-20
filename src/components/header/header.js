@@ -8,7 +8,10 @@ export default class Header extends React.Component {
       <header>
         <ul>
           <li>
-            <Link to="/users">Users</Link>
+            <Link to="/">主页</Link>
+          </li>
+          <li>
+            <Link to="/users">用户</Link>
           </li>
         </ul>
       </header>
