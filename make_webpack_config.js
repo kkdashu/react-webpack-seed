@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var node_modules = path.resolve(__dirname, 'node_modules');
 var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
 module.exports = function(options) {
@@ -12,7 +13,11 @@ module.exports = function(options) {
       path.resolve(__dirname, 'src/app.js')
     ];
     plugins = [
-      new ExtractTextPlugin("bundle.css")
+      new ExtractTextPlugin("bundle.css"),
+      new HtmlWebpackPlugin({
+        template: 'index.html',
+        inject: true
+      })
     ];
   } else {
     entry = {
@@ -21,7 +26,23 @@ module.exports = function(options) {
     };
     plugins = [
       new ExtractTextPlugin("bundle.css"),
-      new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
+      new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+      new HtmlWebpackPlugin({
+        template: 'index.html',
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true,
+          removeRedundantAttributes: true,
+          useShortDoctype: true,
+          removeEmptyAttributes: true,
+          removeStyleLinkTypeAttributes: true,
+          keepClosingSlash: true,
+          minifyJS: true,
+          minifyCSS: true,
+          minifyURLs: true
+        },
+        inject: true
+      })
     ];
   }
   return {
