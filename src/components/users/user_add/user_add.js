@@ -12,10 +12,9 @@ class UserAdd extends Component {
       return;
     }
     var user = {name: name, email: email};
-    this.props.addUser(user);
+    this.props.dispatch(addUser(user));
     this.refs.name.value = '';
     this.refs.email.value = '';
-    this.props.history.pushState(null, '/users');
   }
   render () {
     return (
@@ -33,6 +32,5 @@ class UserAdd extends Component {
 }
 
 export default connect(
-  null,
-  { addUser }
+  null
 )(UserAdd);

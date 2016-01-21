@@ -7,9 +7,9 @@ import { fetchUsers } from 'actions/user_action';
 class Users extends Component {
   render () {
     let userList = null,
-      { users, fetchUsers } = this.props;
+      { users, dispatch } = this.props;
     if(!users || !users.length) {
-      fetchUsers();
+      dispatch(fetchUsers());
     } else {
       userList = (
         users.map((p) => {
@@ -35,6 +35,5 @@ class Users extends Component {
   }
 }
 export default connect(
-  state => ( {users: state.users.users} ),
-  { fetchUsers }
+  state => ( {users: state.users.users} )
 )(Users);
